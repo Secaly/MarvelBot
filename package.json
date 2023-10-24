@@ -1,0 +1,17 @@
+{
+  "name": "marvelbot",
+  "version": "1.0.0",
+  "main": "bot.ts",
+  "repository": "https://github.com/Secaly/marvelbot.git",
+  "author": "Secaly <kevin.ledieu.fr@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^20.8.8",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "start": "tsc && node dist/bot.js"
+  }
+}
