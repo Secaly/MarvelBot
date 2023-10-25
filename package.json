@@ -11,6 +11,7 @@
     "dotenv": "^16.3.1",
     "typescript": "^5.2.2"
   },
+  "type": "module",
   "scripts": {
     "start": "tsc && node dist/bot.js"
   }
