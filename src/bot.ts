@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
+import { loadHandlers } from './functions/library/launch.js';
 
 // Load environment variables from .env
 dotenv.config();
@@ -15,9 +16,6 @@ if (!token) {
   console.error('Discord token is missing in the .env file.');
   process.exit(1);
 }
-
-client.once('ready', () => {
-  console.log(`Logged in as ${client.user?.tag}`);
-});
+await loadHandlers(client);
 
 client.login(token);
