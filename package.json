@@ -6,13 +6,16 @@
   "author": "Secaly <kevin.ledieu.fr@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^20.8.8",
     "discord.js": "^14.13.0",
-    "dotenv": "^16.3.1",
-    "typescript": "^5.2.2"
+    "dotenv": "^16.3.1"
   },
   "type": "module",
   "scripts": {
-    "start": "tsc && node dist/bot.js"
+    "start": "ts-node --esm dist/bot.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }
