@@ -7,11 +7,12 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^14.13.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "redis": "^4.6.10"
   },
   "type": "module",
   "scripts": {
-    "start": "ts-node --esm dist/bot.js"
+    "start": "ts-node --esm src/bot.ts"
   },
   "devDependencies": {
     "@types/node": "^20.8.8",
