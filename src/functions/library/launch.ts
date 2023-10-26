@@ -10,7 +10,7 @@ export const loadHandlers = async (client: Client): Promise<void> => {
   const handlerFiles = handlersDir.filter((file: string) => file.endsWith('.ts'));
 
   for (const handlerFile of handlerFiles) {
-    const { handle } = await import(`../../src/functions/${handlerFile}`);
+    const { handle } = await import(`../../../src/functions/handlers/${handlerFile}`);
     await handle(client);
   }
 };
