@@ -4,7 +4,23 @@ import {
   MessageComponentInteraction,
   Collection,
   ChatInputCommandInteraction,
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
 } from 'discord.js';
+
+// Environment variables
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      DISCORD_TOKEN: string;
+      BOT_ID: string;
+      MARVEL_API_PUBLIC_KEY: string;
+      MARVEL_API_PRIVATE_KEY: string;
+    }
+  }
+}
 
 // Discord client
 
@@ -24,7 +40,7 @@ export type ExecutableSlashCommand = {
 
 export type ExecutableButtonComponent = {
   data: { name: string };
-  execute: (interaction: MessageComponentInteraction, client: Client, ...args: any) => Promise<void>;
+  execute: (interaction: MessageComponentInteraction, client: Client, ...args: string[]) => Promise<void>;
 };
 
 export type BotEvent = {
@@ -35,17 +51,17 @@ export type BotEvent = {
 
 // Marvel API types
 
-export type apiResult = {
+export type ApiResult = {
   code: number; // The HTTP status code of the returned result
   status: string; // A string description of the call status
-  data: apiContainerResult; // The results returned by the call
+  data: ApiContainerResult; // The results returned by the call
   etag: string; // A digest value of the content
   copyright: string; // The copyright notice for the returned result
   attributionText: string; // The attribution notice for this result
   attributionHTML: string; // An HTML representation of the attribution notice for this result
 };
 
-export type apiContainerResult = {
+export type ApiContainerResult = {
   offset: number; // The requested offset (skipped results) of the call
   limit: number; // The requested result limit
   total: number; // The total number of results available
@@ -53,9 +69,34 @@ export type apiContainerResult = {
   results: any[]; // The list of entities returned by the call
 };
 
+export type ApiError = {
+  code: string; // the http status code of the error
+  status: number; // a description of the error
+};
+
 // Customs types
 
-export type interactionReplyFile = {
+export type InteractionReplyFile = {
   attachment: Buffer | string;
   name: string;
+};
+
+export type CharacterData = {
+  id: number;
+  name: string;
+  description: string | undefined;
+  url: string;
+  thumbnail: string | undefined;
+  comicsAvailable: number;
+  comics: ComicData[];
+};
+
+export type ComicData = {
+  title: string;
+  description: string | undefined;
+};
+
+export type ReplyOptions = {
+  embeds: EmbedBuilder[];
+  components: ActionRowBuilder<ButtonBuilder>[];
 };
