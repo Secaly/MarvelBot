@@ -1,0 +1,17 @@
+version: '3'
+services:
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+    environment:
+      - DISCORD_TOKEN=
+      - BOT_ID=
+      - MARVEL_API_PUBLIC_KEY=
+      - MARVEL_API_PRIVATE_KEY=
+    volumes:
+      - .:/usr/src/app
+  redis:
+    image: redis:latest
