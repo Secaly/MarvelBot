@@ -1,17 +1,21 @@
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
 import { loadHandlers } from './functions/library/launch.js';
+import redisClient from './functions/library/redis.js';
 import type { ExecutableButtonComponent, ExecutableSlashCommand } from './types.js';
 
-// Load environment variables from .env
+// Load environment variables
 dotenv.config();
 
-// Access Discord token from the environment variables
-const token = process.env.DISCORD_TOKEN;
+// Define the list of required environment variables.
+const requiredEnvVars = ['DISCORD_TOKEN', 'BOT_ID', 'MARVEL_API_PUBLIC_KEY', 'MARVEL_API_PRIVATE_KEY'];
 
-if (!token) {
-  console.error('Discord token is missing in the .env file.');
-  process.exit(1);
+// Check if the required environment variables are set.
+for (const envVar of requiredEnvVars) {
+  if (!process.env[envVar]) {
+    console.error(`Error: ${envVar} environment variable is not set.`);
+    process.exit(1);
+  }
 }
 
 // Setup the Discord Client
@@ -25,6 +29,11 @@ client.executableSlashCommands = new Collection<string, ExecutableSlashCommand>(
 // Components collections
 client.executableButtonComponents = new Collection<string, ExecutableButtonComponent>();
 
+// Load event handlers for the Discord client.
 await loadHandlers(client);
 
-client.login(token);
+// Connect to the Redis database and flush all data.
+await redisClient.connect();
+
+// Log in to Discord using the provided token.
+client.login(process.env.DISCORD_TOKEN);
