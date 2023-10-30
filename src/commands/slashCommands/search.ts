@@ -9,7 +9,7 @@ import { replyOptions } from '../../functions/library/interaction.js';
 export const command: ExecutableSlashCommand = {
   data: new SlashCommandBuilder()
     .setName('search')
-    .setDescription('Return')
+    .setDescription('Returns the Marvel character with its description and the list of comics in which it appears.')
     .addStringOption((option) => option.setName('name').setDescription('Nom du call').setRequired(true))
     .setDefaultMemberPermissions(PermissionFlagsBits.UseApplicationCommands),
   execute: async (interaction: ChatInputCommandInteraction, client: Client): Promise<void> => {
