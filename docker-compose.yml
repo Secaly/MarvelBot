@@ -1,9 +1,7 @@
 version: '3'
 services:
   myapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: 'ghcr.io/secaly/marvelbot:master'
     depends_on:
       - redis
     environment:
