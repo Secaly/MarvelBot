@@ -36,7 +36,11 @@ Once the bot is on your server, you can retrieve its ID by right-clicking `Copy 
    - MARVEL_API_PUBLIC_KEY=
    - MARVEL_API_PRIVATE_KEY=
    ```
-3. Run the docker command
+3. Run the yarn command
+   ```sh
+   yarn install
+   ```
+4. Run the docker command
    ```sh
    docker compose up
    ```
