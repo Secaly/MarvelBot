@@ -8,7 +8,7 @@ import { characterEmbed } from './embed.js';
  * @param page - The current page number.
  * @returns ReplyOptions containing an embed and navigation components.
  */
-export const replyOptions = (characterData: CharacterData, page: number): ReplyOptions => {
+export const replyOptions = (characterData: CharacterData, page: number, characterName: string): ReplyOptions => {
   const numberOfComicsDisplayed = 5;
 
   // Create an embed to display character information for the given page.
@@ -19,6 +19,6 @@ export const replyOptions = (characterData: CharacterData, page: number): ReplyO
 
   return {
     embeds: [embed],
-    components: [arrowsRow(characterData.name, page, maximumPages)],
+    components: [arrowsRow(characterName, page, maximumPages)],
   };
 };

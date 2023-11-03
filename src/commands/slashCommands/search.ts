@@ -13,7 +13,7 @@ export const command: ExecutableSlashCommand = {
     .addStringOption((option) => option.setName('name').setDescription('Nom du call').setRequired(true))
     .setDefaultMemberPermissions(PermissionFlagsBits.UseApplicationCommands),
   execute: async (interaction: ChatInputCommandInteraction, client: Client): Promise<void> => {
-    await interaction.deferReply({ ephemeral: true, fetchReply: true });
+    await interaction.deferReply({ ephemeral: true });
 
     const characterName = interaction.options.getString('name');
     const page = 0;
@@ -29,7 +29,7 @@ export const command: ExecutableSlashCommand = {
 
     if (characterJSON) {
       const characterData: CharacterData = JSON.parse(characterJSON);
-      await interaction.editReply(replyOptions(characterData, page));
+      await interaction.editReply(replyOptions(characterData, page, characterName));
 
       return;
     }
@@ -50,6 +50,6 @@ export const command: ExecutableSlashCommand = {
     // Cache the character data in Redis with a one day expiration (60 sec * 60 min * 24 hours)
     await redisClient.set(characterName, JSON.stringify(characterData), { EX: 60 * 60 * 24 });
 
-    await interaction.editReply(replyOptions(characterData, page));
+    await interaction.editReply(replyOptions(characterData, page, characterName));
   },
 };
